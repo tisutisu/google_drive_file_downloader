@@ -14,10 +14,11 @@ https://developers.google.com/workspace/guides/create-project
 https://developers.google.com/workspace/guides/create-credentials
 
 ### [Usage]
-
+ 
 Run the "downloader.py" script from command line as below:
 
-python downloader.py -i <file_id> -d <destination_folder>
+python downloader.py --list <size>
+python downloader.py --file_id <file_id> --local_dir <destination_folder>
 
 For example:
 1. To download a file with file_id = 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH to default directory "downloads" in the current location : 
@@ -27,6 +28,10 @@ python downloader.py -i 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH
 2. To download a file with file_id = 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH to location "C:\Users\sushanta\Desktop" :
 
 python downloader.py -i 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH -d "C:\Users\sushanta\Desktop"
+
+3. To list 10 files present in drive :
+
+python downloader.py --list 10
 
 #### Note:
 If this is your first time running the sample, the sample opens a new window prompting you to authorize access to your data:
