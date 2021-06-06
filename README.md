@@ -1,4 +1,4 @@
-# google_drive_file_downloader
+## Application to download google drive files from command line
 This tool is for downloading files from google drive
 
 ### [Prerequisites]
