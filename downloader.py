@@ -108,6 +108,7 @@ def main():
 	parser = argparse.ArgumentParser(description='Google Drive downloader')
 	parser.add_argument("-i", "--file_id", type=str, action="store", help="Id of the file to download")
 	parser.add_argument("-d", "--local_dir", type=str, action="store", default="downloads", help="Local folder to download the file")
+	parser.add_argument("-l", "--list", type=int, action="store", help="List of the files present in drive")
 	args = parser.parse_args()
 	
 	drive_service = get_drive_service()
@@ -135,12 +136,15 @@ def main():
 		
 		download_file(drive_service, fileId, local_file_path)
 
+	l = args.list
+	if l != None:
+		list_of_filename_and_fileId(drive_service, l)
+
 	#Download Test Sample
 	# id : '1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH' name: form_1_signed.pdf
 	# id : '1-dNrz5JlWxv2AhhgnzMx4RW1Ho4hfHo0' name: photo.jpg
 	# id : '1l72diSxwK413K2i1ux5hNgHk7_ZORebh' name: xyz.txt
 
-	#list_of_filename_and_fileId(drive_service, 10)
 	#upload_file(drive_service, 'files/photo.jpg', 'image/jpeg')
 
 if __name__ == '__main__':
