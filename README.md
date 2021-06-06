@@ -35,7 +35,7 @@ python downloader.py -i 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH -d "C:\Users\sushanta\
 python downloader.py --list 10
 
 #### Note:
-If this is your first time running the sample, the sample opens a new window prompting you to authorize access to your data:
+If this is your first time running the script, the script opens a new window prompting you to authorize access to your data:
 
 1. If you are not already signed in to your Google account, you are prompted to sign in. 
    If you are signed in to multiple Google accounts, you are asked to select one account to use for the authorization.
