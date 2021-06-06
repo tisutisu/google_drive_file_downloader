@@ -122,11 +122,16 @@ def main():
 			sys.exit("File not found in drive : {}".format(fileId))
 		
 		if mimetype == 'text/plain':
-			file_ext = 'txt'
+			print("Text File")
+		elif mimetype == 'image/jpeg':
+			print("Jpeg file")
+		elif mimetype == 'application/pdf':
+			print("PDF File")
+			file_name += '.pdf'
 		else:
-			file_ext = mimetype.split('/')[-1]
+			print(mimetype)
 		
-		local_file_path = args.local_dir + os.sep + file_name + '.' + file_ext 
+		local_file_path = args.local_dir + os.sep + file_name 
 		
 		download_file(drive_service, fileId, local_file_path)
 
