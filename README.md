@@ -17,7 +17,7 @@ https://developers.google.com/workspace/guides/create-credentials
  
 Run the "downloader.py" script from command line as below:
 
-python downloader.py --list <size>
+python downloader.py --list <no_of_entries>
 
 python downloader.py --file_id <file_id> --local_dir <destination_folder>
 
