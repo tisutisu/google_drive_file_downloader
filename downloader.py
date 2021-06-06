@@ -1,7 +1,9 @@
 # https://developers.google.com/drive/api/v3/quickstart/python
 # pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 import os
+import sys
 import io
+import argparse
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -55,7 +57,7 @@ def is_file_exists_in_drive(service, file_id):
 		response = service.files().list(spaces='drive', fields='nextPageToken, files(id, name)', pageToken=page_token).execute()
 		for file in response.get('files', []):
 			if file.get('id') == file_id:
-				print('Found file: %s (%s)' % (file.get('name'), file.get('id')))
+				#print('Found file: %s (%s)' % (file.get('name'), file.get('id')))
 				return True
 		page_token = response.get('nextPageToken', None)
 		if page_token is None:
@@ -65,21 +67,24 @@ def is_file_exists_in_drive(service, file_id):
 def get_filename_from_drive(service, file_id):
 	page_token = None
 	while True:
-		response = service.files().list(spaces='drive', fields='nextPageToken, files(id, name)', pageToken=page_token).execute()
+		response = service.files().list(spaces='drive', fields='nextPageToken, files(id, name, mimeType)', pageToken=page_token).execute()
 		for file in response.get('files', []):
 			if file.get('id') == file_id:
-				return file.get('name')
+				return file.get('name'), file.get('mimeType')
 		page_token = response.get('nextPageToken', None)
 		if page_token is None:
 			break
-	return None
+	return None, None
 
 def download_file(service, file_id, local_file_path):
-	request = service.files().get_media(fileId=file_id)
-	fh = io.BytesIO()
-	downloader = MediaIoBaseDownload(fh, request)
-	done = False
+	if not is_file_exists_in_drive(service, file_id):
+		print("File not found in drive")
+
 	try:
+		request = service.files().get_media(fileId=file_id)
+		fh = io.BytesIO()
+		downloader = MediaIoBaseDownload(fh, request)
+		done = False
 		while done is False:
 			status, done = downloader.next_chunk()
 			print("Download %d%%." % int(status.progress() * 100))
@@ -99,10 +104,38 @@ def upload_file(service, file_path, mtype):
 	print('File ID: {}'.format(file.get('id')))
 
 def main():
+	
+	parser = argparse.ArgumentParser(description='Google Drive downloader')
+	parser.add_argument("-i", "--file_id", type=str, action="store", help="Id of the file to download")
+	parser.add_argument("-d", "--local_dir", type=str, action="store", default="downloads", help="Local folder to download the file")
+	args = parser.parse_args()
+	
 	drive_service = get_drive_service()
+	fileId = args.file_id
+
+	if fileId != None:
+		
+		if len(fileId) != 33:
+			sys.exit("File id is incorrect")
+		file_name, mimetype = get_filename_from_drive(drive_service, fileId)
+		if file_name == None:
+			sys.exit("File not found in drive : {}".format(fileId))
+		
+		if mimetype == 'text/plain':
+			file_ext = 'txt'
+		else:
+			file_ext = mimetype.split('/')[-1]
+		
+		local_file_path = args.local_dir + os.sep + file_name + '.' + file_ext 
+		
+		download_file(drive_service, fileId, local_file_path)
+
+	#Download Test Sample
+	# id : '1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH' name: form_1_signed.pdf
+	# id : '1-dNrz5JlWxv2AhhgnzMx4RW1Ho4hfHo0' name: photo.jpg
+	# id : '1l72diSxwK413K2i1ux5hNgHk7_ZORebh' name: xyz.txt
+
 	#list_of_filename_and_fileId(drive_service, 10)
-	#download_file(drive_service, '1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH', 'downloads\\xyz.pdf')
-	#is_file_exists_in_drive(drive_service, '1ovnMqBv8OP6U_RPj0k--QOEtsbQ1xhZBkS5eqSew_o4')
 	#upload_file(drive_service, 'files/photo.jpg', 'image/jpeg')
 
 if __name__ == '__main__':
