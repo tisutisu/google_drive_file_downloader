@@ -29,23 +29,23 @@ https://developers.google.com/workspace/guides/create-credentials
  
 Run the "downloader.py" script from command line as below:
 
-python downloader.py --list <no_of_entries>
+_python downloader.py --list <no_of_entries>_
 
-python downloader.py --file_id <file_id> --local_dir <destination_folder>
+_python downloader.py --file_id <file_id> --local_dir <destination_folder>_
 
 For example:
 
 1. To list 10 files present in drive :
 
-python downloader.py --list 10
+_python downloader.py --list 10_
 
 2. To download a file with file_id = 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH to default directory "downloads" in the current location : 
 
-python downloader.py --file_id 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH
+_python downloader.py --file_id 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH_
 
 2. To download a file with file_id = 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH to location "C:\Users\sushanta\Desktop" :
 
-python downloader.py --file_id 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH --local_dir "C:\Users\sushanta\Desktop"
+_python downloader.py --file_id 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH --local_dir "C:\Users\sushanta\Desktop"_
 
 
 
