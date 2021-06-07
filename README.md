@@ -8,7 +8,7 @@ you need the following prerequisites:
 
 2. Install the google client api libraries using :
 
-_pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib_
+#### _pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib_
 
 3. Create a google cloud platform project and enable "Google Drive API". Refer :
 https://developers.google.com/workspace/guides/create-project
@@ -29,23 +29,23 @@ https://developers.google.com/workspace/guides/create-credentials
  
 Run the "downloader.py" script from command line as below:
 
-_python downloader.py --list <no_of_entries>_
+#### _python downloader.py --list <no_of_entries>_
 
-_python downloader.py --file_id <file_id> --local_dir <destination_folder>_
+#### _python downloader.py --file_id <file_id> --local_dir <destination_folder>_
 
 For example:
 
 1. To list 10 files present in drive :
 
-_python downloader.py --list 10_
+#### _python downloader.py --list 10_
 
 2. To download a file with file_id = 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH to default directory "downloads" in the current location : 
 
-_python downloader.py --file_id 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH_
+#### _python downloader.py --file_id 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH_
 
 2. To download a file with file_id = 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH to location "C:\Users\sushanta\Desktop" :
 
-_python downloader.py --file_id 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH --local_dir "C:\Users\sushanta\Desktop"_
+#### _python downloader.py --file_id 1FSwcfi4EYYwDsT7-yGBBc_9jY8xceeKH --local_dir "C:\Users\sushanta\Desktop"_
 
 
 
