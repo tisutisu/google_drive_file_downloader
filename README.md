@@ -22,7 +22,7 @@ https://developers.google.com/workspace/guides/create-credentials
     
     4c. Add Test Users (email) for whom you want to allow the access of the API
     
-    4d. After creating the Desktop application credentials and download the client secret file to this local repo directory and rename it as client_secrets.json
+    4d. After creating the Desktop application credentials, download the client secret file to this local repo directory and rename it as client_secrets.json
     
 
 ### [Usage]
