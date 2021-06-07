@@ -1,5 +1,3 @@
-# https://developers.google.com/drive/api/v3/quickstart/python
-# pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 import os
 import sys
 import io
@@ -14,9 +12,6 @@ from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
 SCOPES = ['https://www.googleapis.com/auth/drive']
 
 def get_drive_service():
-    """Shows basic usage of the Drive v3 API.
-    Prints the names and ids of the first 10 files the user has access to.
-    """
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -40,7 +35,7 @@ def get_drive_service():
     return service
 
 def list_of_filename_and_fileId(service, size):
-    # Call the Drive v3 API
+
     results = service.files().list(pageSize=size, fields="nextPageToken, files(id, name)").execute()
     items = results.get('files', [])
 
@@ -79,7 +74,7 @@ def get_filename_from_drive(service, file_id):
 def download_file(service, file_id, local_file_path):
 	if not is_file_exists_in_drive(service, file_id):
 		print("File not found in drive")
-
+		return False
 	try:
 		request = service.files().get_media(fileId=file_id)
 		fh = io.BytesIO()
@@ -92,9 +87,11 @@ def download_file(service, file_id, local_file_path):
 		with io.open(local_file_path, 'wb') as f:
 			fh.seek(0)
 			f.write(fh.read())
+		return True
 
 	except Exception as e:
 		print('Exception while downloading file: {}'.format(e))
+		return False
 
 def upload_file(service, file_path, mtype):
 	file_metadata = {'name': file_path.split('/')[-1]}
