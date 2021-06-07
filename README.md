@@ -8,7 +8,7 @@ you need the following prerequisites:
 
 2. Install the google client api libraries using :
 
-pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+_pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib_
 
 3. Create a google cloud platform project and enable "Google Drive API". Refer :
 https://developers.google.com/workspace/guides/create-project
